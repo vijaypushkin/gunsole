@@ -1,7 +1,7 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
-    // "types": ["vitest-plugin-random-seed/types"],
+    "types": ["vitest-plugin-random-seed/types"],
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
     "paths": {

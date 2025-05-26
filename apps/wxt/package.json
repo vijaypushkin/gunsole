@@ -5,8 +5,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "wxt -p 3001",
-    "dev:firefox": "wxt -b firefox -p 3001",
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
     "build": "wxt build",
     "build:firefox": "wxt build -b firefox",
     "zip": "wxt zip",
@@ -15,7 +15,13 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
-    "solid-js": "^1.9.6"
+    "@kobalte/core": "^0.13.9",
+    "@kobalte/tailwindcss": "^0.9.0",
+    "@tailwindcss/vite": "^4.1.7",
+    "daisyui": "^5.0.37",
+    "solid-js": "^1.9.6",
+    "tailwindcss": "^4.1.7",
+    "vitest-plugin-random-seed": "^1.1.1"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",

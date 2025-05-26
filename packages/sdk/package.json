@@ -1,0 +1,36 @@
+{
+  "name": "gunsole-sdk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --dts --format esm,cjs",
+    "dev": "tsup src/index.ts --watch --dts --format esm,cjs",
+    "lint": "eslint 'src/**/*.{ts,tsx}'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/lodash": "^4.17.17",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  },
+  "eslintConfig": {
+    "extends": "@repo/eslint-config"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

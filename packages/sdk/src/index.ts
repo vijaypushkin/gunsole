@@ -29,7 +29,15 @@ function renderLog<T extends Record<string, unknown>>(
     interpolate: /{([\s\S]+?)}/g,
   })(data);
 
-  console.log(rendered);
+  window.postMessage(
+    {
+      type: "GUNSOLE_SDK_MESSAGE",
+      source: "gunsole-sdk",
+      tab: "log", // default for now; can be dynamic later
+      payload: rendered,
+    },
+    "*"
+  );
 }
 
 export function createGunsole(options: GunsoleOptions = {}): Gunsole {

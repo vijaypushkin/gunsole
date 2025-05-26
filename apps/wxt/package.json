@@ -1,0 +1,27 @@
+{
+  "name": "gunsole-wxt",
+  "description": "manifest.json description",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt -p 3001",
+    "dev:firefox": "wxt -b firefox -p 3001",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "tsc --noEmit",
+    "postinstall": "wxt prepare"
+  },
+  "dependencies": {
+    "solid-js": "^1.9.6"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@wxt-dev/module-solid": "^1.1.3",
+    "typescript": "^5.8.3",
+    "wxt": "^0.20.6"
+  }
+}

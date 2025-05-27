@@ -1,44 +1,10 @@
-import template from "lodash/template";
-
-export type GunsoleOptions = {
-  enabled?: boolean;
-};
-
-export type GunsoleTab<T extends Record<string, unknown> = any> = {
-  name: string;
-  type: "log" | "html";
-  entryShell: string;
-  globalShell?: string;
-};
-
-export type Gunsole = {
-  send: {
-    (tabId: string, object: Record<string, unknown>): void;
-  };
-  registerTab: <T extends Record<string, unknown>>(
-    id: string,
-    params: GunsoleTab<T>
-  ) => void;
-};
-
-function renderLog<T extends Record<string, unknown>>(
-  entryShell: string,
-  data: T
-) {
-  const rendered = template(entryShell, {
-    interpolate: /{([\s\S]+?)}/g,
-  })(data);
-
-  window.postMessage(
-    {
-      type: "GUNSOLE_SDK_MESSAGE",
-      source: "gunsole-sdk",
-      tab: "log", // default for now; can be dynamic later
-      payload: rendered,
-    },
-    "*"
-  );
-}
+import {
+  Gunsole,
+  GunsoleOptions,
+  GunsoleTab,
+  MSG_SOURCE,
+  MSG_TYPE,
+} from "gunsole-shared";
 
 export function createGunsole(options: GunsoleOptions = {}): Gunsole {
   const { enabled = true } = options;
@@ -52,7 +18,15 @@ export function createGunsole(options: GunsoleOptions = {}): Gunsole {
         const tab = tabs.get(tabId);
 
         if (tab) {
-          renderLog(tab.entryShell, object);
+          window.postMessage(
+            {
+              type: MSG_TYPE.GUNSOLE_SDK_MESSAGE,
+              source: MSG_SOURCE.GUNSOLE_SDK,
+              tab: "log", // default for now; can be dynamic later
+              payload: object,
+            },
+            "*"
+          );
         }
       }
     : noop;
@@ -61,7 +35,14 @@ export function createGunsole(options: GunsoleOptions = {}): Gunsole {
     ? (name: string, params: GunsoleTab) => {
         tabs.set(name, params);
 
-        console.log(`[Gunsole] Tab registered: ${name}`);
+        window.postMessage(
+          {
+            type: MSG_TYPE.GUNSOLE_SDK_TAB_REGISTERED,
+            source: MSG_SOURCE.GUNSOLE_SDK,
+            payload: params,
+          },
+          "*"
+        );
       }
     : noop;
 

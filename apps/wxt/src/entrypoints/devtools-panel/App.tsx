@@ -1,18 +1,19 @@
+import { MSG_TYPE } from "gunsole-shared";
 import { createSignal, onCleanup, onMount } from "solid-js";
 import { browser } from "wxt/browser";
 
+const handleTabCreation = (tab, setTabs) => {};
+
 function App() {
   const [logs, setLogs] = createSignal<string[]>([]);
+  const [tabs, setTabs] = createSignal<Record<string, number>>({});
 
   onMount(() => {
     const handler = (message: any) => {
-      if (message.type === "SDK_TO_DEVTOOLS") {
-        // Handle the message from your SDK
+      if (message.type === MSG_TYPE.CONTENT_SCRIPT_TO_DEVTOOLS) {
         console.log("Received from gunsole-sdk:", message.data);
 
         setLogs((logs) => [...logs, JSON.stringify(message.data)]);
-        // Update your devtools UI
-        // updateDevtoolsUI(message.data);
       }
     };
 

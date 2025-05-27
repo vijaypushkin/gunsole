@@ -1,0 +1,28 @@
+{
+  "name": "logging-demo-solid",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.7",
+    "daisyui": "^5.0.38",
+    "solid-js": "^1.9.5",
+    "tailwindcss": "^4.1.7"
+  },
+  "devDependencies": {
+    "gunsole-sdk": "workspace:gunsole-sdk",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-solid": "^2.11.6"
+  },
+  "eslintConfig": {
+    "extends": "@repo/eslint-config"
+  }
+}
